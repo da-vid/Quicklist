@@ -1,21 +1,28 @@
 <!doctype html>
 <html ng-app="quicklist">
 	<head>
+		<!-- Firebase -->
+		<script src="https://cdn.firebase.com/v0/firebase.js"></script>
+		<!-- AngularJS -->
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+		<!-- AngularFire Plugin -->
+		<script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js"></script>
+		<!-- This quicklist app -->
 		<script type="text/javascript" src="js/quicklist.js"></script>
 	</head>
   	<body>
 		<div ng-controller="listController">
 			<form name="newItemForm">
 				<input type="text" ng-model = "nextItemName" required />
-				<button ng-click="addItem()">Add</button>
+				<button type="submit" ng-click="addItem()">Add</button>
 			</form>
 			<ul>
-				<li ng-repeat="i in items">
-					{{i.ID}} - {{i.name}} - {{i.checked}}
-					<button ng-click="deleteItem(i.ID)">del</button>
-					<button ng-click="i.checked = !i.checked">chk</button>
+				<li ng-repeat="i in items"> 
+					{{i.ID}} - {{i.name}} - {{i.checked}} 
+					<!-- <button ng-click="deleteItem(i.ID)">del</button>
+					<button ng-click="i.checked = !i.checked">chk</button> -->
 				</li>
 			</ul>
+		</div>
 	</body>
 </html>
