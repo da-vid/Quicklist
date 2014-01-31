@@ -1,0 +1,21 @@
+<!doctype html>
+<html ng-app="quicklist">
+	<head>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+		<script type="text/javascript" src="js/quicklist.js"></script>
+	</head>
+  	<body>
+		<div ng-controller="listController">
+			<form name="newItemForm">
+				<input type="text" ng-model = "nextItemName" required />
+				<button ng-click="addItem()">Add</button>
+			</form>
+			<ul>
+				<li ng-repeat="i in items">
+					{{i.ID}} - {{i.name}} - {{i.checked}}
+					<button ng-click="deleteItem(i.ID)">del</button>
+					<button ng-click="i.checked = !i.checked">chk</button>
+				</li>
+			</ul>
+	</body>
+</html>
