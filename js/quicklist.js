@@ -1,49 +1,51 @@
-var quicklist = angular.module('quicklist', ['firebase']);
+angular.module("quicklist", ["firebase"])
+    .factory("listService", ["$firebase", function($firebase) {
+        var ref = new Firebase("https://qwiklist.firebaseio.com/list");
+        return $firebase(ref);
+    }])
 
-quicklist.controller('listController', function($scope, $firebase){
-    var itemsRef = new Firebase("https://qwiklist.firebaseio.com/list");
-    $scope.itemsFB = $firebase(itemsRef);
-    $scope.items = [];
+    .controller("listController", ["$scope", "listService",
+        function($scope, listService) {
+            $scope.items = listService;
 
-    // $scope.items.$add({
-    //             "ID":1,
-    //             "name":"namedsfasdf",
-    //             "checked":false
-    //         });
+            $scope.addItem = function() {
+                $scope.items.$add({ID: $scope.nextItemID(), name: $scope.itemName, checked: false});
+                $scope.itemName = "";
+            };
 
-    $scope.itemsFB.$bind($scope, "items");
-  
-    $scope.addItem = function (){
-        // if($scope.newItemForm.$valid)
-        // {
-            $scope.items.push({
-                "ID":10,//$scope.nextItemID(),
-                "name":$scope.nextItemName,
-                "checked":false
-            });
-        // }
-    };
+            $scope.nextItemID = function() {
+                var maxItemID = 0;
+                var keys = $scope.items.$getIndex();
 
-    // $scope.deleteItem = function deleteItem(itemID){
-    //     var index = -1;
-    //     for (var i = 0, len = $scope.items.length; i < len; i++) {
-    //         if ($scope.items[i].ID === itemID) {
-    //             index = i;
-    //             break;
-    //         }            
-    //     }
+                //https://www.firebase.com/docs/angular/reference.html#getindex
+                keys.forEach(function (key, i) {
+                    if($scope.items[key].ID > maxItemID) {
+                        maxItemID = $scope.items[key].ID;
+                    }
+                });
+                return maxItemID + 1;
+            };
 
-    //     $scope.items.splice(index, 1);
-    // };
+            $scope.deleteItem = function(itemID) {
+                var keys = $scope.items.$getIndex();
+                keys.forEach(function (key, i) {
+                    if($scope.items[key].ID === itemID) {
+                        $scope.items.$remove(key); 
+                    }
+                });
+            };
 
-    // $scope.nextItemID = function nextItemID(){
-    //     if($scope.items.length===0) {
-    //         return 0;
-    //     }
-    //     //the maximum ID in the $scope.items array incremented by 1
-    //     //http://stackoverflow.com/questions/4020796/finding-the-max-value-of-an-attribute-in-an-array-of-objects
-    //     return Math.max.apply(Math,$scope.items.map(function(o){return o.ID;}))+1;
-    // };
+            $scope.checkItem = function(itemID) {
+                var keys = $scope.items.$getIndex();
+                keys.forEach(function (key, i) {
+                    if($scope.items[key].ID === itemID) {
+                        $scope.items[key].checked = !($scope.items[key].checked); 
+                        $scope.items.$save(key);                      
+                    }
+                });
+            };
+        }
+    ]);
 
-    //return angularFire(itemsRef, $scope, "items");
-});
+
+
