@@ -1,33 +1,12 @@
-var fbRef;
-
 angular.module("quicklist", ["firebase"])
     .factory("listService", ["$firebase", function($firebase) {
-        fbRef = new Firebase("https://qwiklist.firebaseio.com/list");
-        return $firebase(fbRef);
+        var ref = new Firebase("https://qwiklist.firebaseio.com/list");
+        return $firebase(ref);
     }])
 
-    .controller("listController", ["$scope", "$rootScope", "$firebaseSimpleLogin", "listService",
-        function($scope, $rootScope, $firebaseSimpleLogin, listService) {
+    .controller("listController", ["$scope", "listService",
+        function($scope, listService) {
             $scope.items = listService;
-            $rootScope.auth = $firebaseSimpleLogin(fbRef, function(error, user) {
-                alert(hello);
-                if (error) {
-                    // an error occurred while attempting login
-                    alert(error);
-                } else if (user) {
-                    // user authenticated with Firebase
-                    alert('User ID: ' + user.id + ', Provider: ' + user.provider);
-                } else {
-                // user is logged out
-                    alert('logged out');
-                }
-            });
-
-            $rootScope.auth.$login('anonymous');
-
-            //var user = $rootScope.auth.$getCurrentUser();
-
-            //alert('User ID: ' + $rootScope.auth.user.id);
 
             $scope.addItem = function() {
                 $scope.items.$add({ID: $scope.nextItemID(), name: $scope.itemName, checked: false});
