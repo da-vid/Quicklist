@@ -11,7 +11,8 @@ angular.module("quicklist", ["firebase"])
 
             //form validation pattern: http://stackoverflow.com/a/18747273
             $scope.moreThanWhitespace = /\S/;
-            $scope.loaded = false;
+            // $scope.loaded = false;
+
 
             $scope.addItem = function() {
                 if ($scope.addItemForm.addItemBox.$valid) {
@@ -31,6 +32,17 @@ angular.module("quicklist", ["firebase"])
                     }
                 });
                 return maxItemID + 1;
+            };
+
+            $scope.itemCount = function() {
+                var count = 0;
+                var keys = $scope.items.$getIndex();
+
+                //https://www.firebase.com/docs/angular/reference.html#getindex
+                keys.forEach(function (key, i) {
+                    count++;
+                });
+                return count;
             };
 
             $scope.deleteItem = function(itemID) {

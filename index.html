@@ -14,7 +14,7 @@
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 		<title>quicklist</title>
 	</head>
-	<body ng-controller="listController">
+	<body ng-controller="listController" ng-init="scope = {loaded = false}">
 		<div class="viewport">
 			<div class="main">
 				<header>
@@ -26,8 +26,8 @@
 						sharable, disposable lists. save or share your list's url!
 					</div>
 				</header>
-				<form name="addItemForm" ng-submit="addItem();">
-					<input name="addItemBox" class="addItemBox" type="text" ng-model="itemName" placeholder="enter your next item" required ng-pattern="moreThanWhitespace" />
+				<form name="addItemForm" ng-submit="addItem()" ng-show="loaded">
+					<input name="addItemBox" class="addItemBox" type="text" ng-model="itemName" placeholder="enter your {{itemCount() && 'next' || 'first'}} item" required ng-pattern="moreThanWhitespace" />
 					<input class="addItemButton" type="submit" value="add" />
 				</form>
 				<div class="spinner" ng-hide="loaded">
