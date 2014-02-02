@@ -75,7 +75,8 @@ a {
 }
 
 .title {
-	font-size: large;
+	font-size: medium;
+	margin-bottom: 3px;
 }
 
 .subscript {

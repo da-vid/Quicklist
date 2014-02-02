@@ -9,14 +9,13 @@ angular.module("quicklist", ["firebase"])
         function($scope, listService) {
             $scope.items = listService;
 
-            //form validation pattern
+            //form validation pattern: http://stackoverflow.com/a/18747273
             $scope.moreThanWhitespace = /\S/;
 
             $scope.addItem = function() {
                 if ($scope.addItemForm.addItemBox.$valid) {
                     $scope.items.$add({ID: $scope.nextItemID(), name: $scope.itemName, checked: false});
                 }
-
                 $scope.itemName = "";
             };
 

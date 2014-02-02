@@ -1,6 +1,9 @@
 <!doctype html>
 <html ng-app="quicklist">
 	<head>
+		<meta name="viewport" content="width=device-width">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<!-- <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" /> -->
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
 		<script src="https://cdn.firebase.com/js/client/1.0.2/firebase.js"></script>
 		<script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js"></script>
@@ -15,10 +18,11 @@
 			<div class="main">
 				<header>
 					<div class="title"> 
-						quicklist <span class="subscript">alpha</span>
+						quicklist 
+						<!-- <span class="subscript">alpha</span> -->
 					</div>
 					<div class="subtitle"> 
-						sharable, disposable lists. save/email/bookmark your url!
+						sharable, disposable lists. save or share your list's url!
 					</div>
 				</header>
 				<form name="addItemForm" ng-submit="addItem();">
@@ -27,12 +31,14 @@
 				</form>
 				<div ng-class="{'listItem': true, 'checkedItem': item.checked}" ng-repeat="item in items">
 					<div class="checkbox" ng-click="checkItem(item)" >
+						<!-- font awesome checkbox icons -->
 						<i ng-class="{'fa': true, 'fa-check-square-o': item.checked, 'fa-square-o': !item.checked, 'fa-lg': true}"></i>
 					</div>
 					<div class="listItemName">
 						{{item.name}} 
 						<div class="deleteButton" ng-click="deleteItem(item.ID)" ng-show="item.checked">	
-						<i class="fa fa-times-circle fa-lg"></i>
+						<!-- font awesome x icon -->
+						<i class="fa fa-times-circle fa-lg"></i> 
 						</span>
 					</div>
 					
