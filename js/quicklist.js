@@ -1,6 +1,7 @@
 angular.module("quicklist", ["firebase"])
     .factory("listService", ["$firebase", function($firebase) {
-        var ref = new Firebase("https://qwiklist.firebaseio.com/list");
+        getListID();
+        var ref = new Firebase("https://qwiklist.firebaseio.com/" + getListID());
         return $firebase(ref);
     }])
 
@@ -8,8 +9,14 @@ angular.module("quicklist", ["firebase"])
         function($scope, listService) {
             $scope.items = listService;
 
+            //form validation pattern
+            $scope.moreThanWhitespace = /\S/;
+
             $scope.addItem = function() {
-                $scope.items.$add({ID: $scope.nextItemID(), name: $scope.itemName, checked: false});
+                if ($scope.addItemForm.addItemBox.$valid) {
+                    $scope.items.$add({ID: $scope.nextItemID(), name: $scope.itemName, checked: false});
+                }
+
                 $scope.itemName = "";
             };
 
@@ -35,14 +42,9 @@ angular.module("quicklist", ["firebase"])
                 });
             };
 
-            $scope.checkItem = function(itemID) {
-                var keys = $scope.items.$getIndex();
-                keys.forEach(function (key, i) {
-                    if($scope.items[key].ID === itemID) {
-                        $scope.items[key].checked = !($scope.items[key].checked); 
-                        $scope.items.$save(key);                      
-                    }
-                });
+            $scope.checkItem = function(item) {
+                item.checked = !item.checked;
+                $scope.items.$save();
             };
         }
     ]);

@@ -3,7 +3,6 @@
 html, body {
 	height: 100%;
 	overflow: scroll;
-	min-height: 460px;
 	position: relative;
 }
 
@@ -61,30 +60,89 @@ a {
 	min-height: 100%;
 	width: 100%;
 	position: relative;
-	background-color: black;
 }
 
 .main {
 	clear: both;
-	text-align: center;
-	border: 0;
-	border-radius: 20px;
-	border-color: black;
-	width: 90%;
 	max-width: 400px;
 	min-width: 260px;
-	height: 430px;
 	overflow: auto;
 	margin: auto;
 	position: absolute;
-	top: 0; left: 0; bottom: 20px; right: 0;
+	left: 0; right: 0;
 	background-color: white;
+	padding: 30px;
 }
 
 .title {
-	padding: 20px 0 15px 0;
-	font-family: Trade Winds, sans-serif;
-	font-size: xx-large;	
+	font-size: large;
+}
+
+.subscript {
+	font-size: x-small;
+}
+
+.subtitle {
+	color: #ccc;
+}
+
+form {
+	text-align: center;
+}
+
+.addItemBox {
+	/*border: 1px solid black;*/
+	border: 0px;
+	font-size: large;
+	width: 70%;
+	border-radius: 10px;
+	padding: .4em 1em .4em 1em;
+	margin: 10px 0 10px 0;
+	background-color: #eee;
+}
+
+.addItemBox:focus {
+	outline: none;
+}
+
+.addItemButton {
+	border: 0px;
+	color: #fff;
+	padding: .3em 1em .3em 1em;
+	font-size: large;
+	border-radius: 10px;
+	background-color: #999;
+}
+
+.listItem {
+	text-align: left;
+	padding: .25em;
+}
+
+.checkedItem {
+	color: #ccc;
+}
+
+.checkbox {
+	display: inline-block;
+	font-size: large;
+	width: 2em;
+	height: 1.2em;
+	vertical-align: top;
+}
+
+.listItemName {
+	display: inline-block;
+	font-size: large;
+	width: 80%;
+}
+
+.deleteButton {
+	vertical-align: top;
+	display: inline-block;
+	color: #ebb;
+	border-radius: 5px;
+	padding: .15em;
 }
 
 /****** Footer ******/

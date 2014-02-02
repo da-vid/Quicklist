@@ -4,23 +4,40 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
 		<script src="https://cdn.firebase.com/js/client/1.0.2/firebase.js"></script>
 		<script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js"></script>
-		<script type='text/javascript'
-        src='https://cdn.firebase.com/js/simple-login/1.2.3/firebase-simple-login.js'></script>
 		<script src="js/quicklist.js"></script>
+		<script src="js/idHelper.js"></script>
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/reset.css">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
 	</head>
 	<body ng-controller="listController">
-		<form ng-submit="addItem();">
-			<input type="text" ng-model="itemName" required/>
-			<input type="submit" value="Add"/>
-		</form>
-		<ul>
-			<li ng-repeat="item in items">
-				{{item.ID}}: {{item.name}} - {{item.checked}}
-				<button ng-click="deleteItem(item.ID)">del</button>
-				<button ng-click="checkItem(item.ID)">chk</button>
-			</li>
-			
-		</ul>
-
+		<div class="viewport">
+			<div class="main">
+				<header>
+					<div class="title"> 
+						quicklist <span class="subscript">alpha</span>
+					</div>
+					<div class="subtitle"> 
+						sharable, disposable lists. save/email/bookmark your url!
+					</div>
+				</header>
+				<form name="addItemForm" ng-submit="addItem();">
+					<input name="addItemBox" class="addItemBox" type="text" ng-model="itemName" placeholder="enter your next item" required ng-pattern="moreThanWhitespace" />
+					<input class="addItemButton" type="submit" value="add" />
+				</form>
+				<div ng-class="{'listItem': true, 'checkedItem': item.checked}" ng-repeat="item in items">
+					<div class="checkbox" ng-click="checkItem(item)" >
+						<i ng-class="{'fa': true, 'fa-check-square-o': item.checked, 'fa-square-o': !item.checked, 'fa-lg': true}"></i>
+					</div>
+					<div class="listItemName">
+						{{item.name}} 
+						<div class="deleteButton" ng-click="deleteItem(item.ID)" ng-show="item.checked">	
+						<i class="fa fa-times-circle fa-lg"></i>
+						</span>
+					</div>
+					
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
