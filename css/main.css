@@ -89,6 +89,7 @@ a {
 
 form {
 	text-align: center;
+	margin: 10px 0 10px 0;	
 }
 
 .addItemBox {
@@ -98,7 +99,6 @@ form {
 	width: 70%;
 	border-radius: 10px;
 	padding: .4em 1em .4em 1em;
-	margin: 10px 0 10px 0;
 	background-color: #eee;
 }
 
@@ -112,7 +112,7 @@ form {
 	padding: .3em 1em .3em 1em;
 	font-size: large;
 	border-radius: 10px;
-	background-color: #999;
+	background-color: #333;
 }
 
 .listItem {
