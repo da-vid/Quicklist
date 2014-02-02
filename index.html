@@ -12,6 +12,7 @@
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/reset.css">
 		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<title>quicklist</title>
 	</head>
 	<body ng-controller="listController">
 		<div class="viewport">
@@ -29,6 +30,9 @@
 					<input name="addItemBox" class="addItemBox" type="text" ng-model="itemName" placeholder="enter your next item" required ng-pattern="moreThanWhitespace" />
 					<input class="addItemButton" type="submit" value="add" />
 				</form>
+				<div class="spinner" ng-hide="loaded">
+					<i class="fa fa-spinner fa-spin fa-3x"></i>
+				</div>
 				<div ng-class="{'listItem': true, 'checkedItem': item.checked}" ng-repeat="item in items">
 					<div class="checkbox" ng-click="checkItem(item)" >
 						<!-- font awesome checkbox icons -->

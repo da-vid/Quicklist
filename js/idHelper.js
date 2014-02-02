@@ -28,10 +28,10 @@ function getQS()
 
 function getListID() {    
     var qs = getQS();
-    if(qs.listID) {
-        return qs.listID;
+    if(qs.i) {
+        return qs.i;
     }
     else {
-        window.location.href = "index.html?listID="+makeID();
+        window.location.href = "index.html?i="+makeID();
     }
 }

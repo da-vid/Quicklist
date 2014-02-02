@@ -115,6 +115,10 @@ form {
 	background-color: #333;
 }
 
+.spinner {
+	text-align: center;
+}
+
 .listItem {
 	text-align: left;
 	padding: .25em;

@@ -11,6 +11,7 @@ angular.module("quicklist", ["firebase"])
 
             //form validation pattern: http://stackoverflow.com/a/18747273
             $scope.moreThanWhitespace = /\S/;
+            $scope.loaded = false;
 
             $scope.addItem = function() {
                 if ($scope.addItemForm.addItemBox.$valid) {
@@ -45,6 +46,10 @@ angular.module("quicklist", ["firebase"])
                 item.checked = !item.checked;
                 $scope.items.$save();
             };
+
+            $scope.items.$on("loaded", function() {
+                $scope.loaded = true;
+            });
         }
     ]);
 
