@@ -34,6 +34,7 @@
 					<i class="fa fa-spinner fa-spin fa-3x"></i>
 				</div>
 				<div ng-class="{'listItem': true, 'checkedItem': item.checked}" ng-repeat="item in items">
+					<div class="checkboxLeft" ng-click="checkItem(item)" ></div>
 					<div class="checkbox" ng-click="checkItem(item)" >
 						<!-- font awesome checkbox icons -->
 						<i ng-class="{'fa': true, 'fa-check-square-o': item.checked, 'fa-square-o': !item.checked, 'fa-lg': true}"></i>
@@ -44,8 +45,7 @@
 						<!-- font awesome x icon -->
 						<i class="fa fa-times-circle fa-lg"></i> 
 						</span>
-					</div>
-					
+					</div>					
 				</div>
 			</div>
 		</div>
