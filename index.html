@@ -17,12 +17,9 @@
 	<body>
 		<div class="viewport">
 			<div class="main">
-				<header>
-					<!-- <div class="title">  -->
+				<header ng-show="loaded">
 					<input name="titleBox" class="titleBox" type="text" ng-model="listName.$value" ng-change="setListName()" placeholder="{{defaultProductName}}">
-						<!-- <span class="subscript">alpha</span> -->
-					<!-- </div> -->
-					<div class="subtitle" ng-show="getListName()==defaultProductName" ng-cloak> 
+					<div class="subtitle" ng-show="getListName()==defaultProductName && loaded" ng-cloak> 
 						sharable, disposable lists. save or share your list's url!
 					</div>
 				</header>
@@ -31,7 +28,7 @@
 					<input class="addItemButton" type="submit" value="add" />
 				</form>
 				<div class="spinner" ng-hide="loaded">
-					<i class="fa fa-spinner fa-spin fa-3x"></i>
+					<i class="fa fa-spinner fa-spin fa-3x"></i>					
 				</div>
 				<div ng-class="{'listItem': true, 'checkedItem': item.checked}" ng-repeat="item in items">
 					<div class="checkboxLeft" ng-click="checkItem(item)" ></div>
