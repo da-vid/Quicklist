@@ -1,10 +1,10 @@
 /****** General ******/
 
-html, body {
+/*html, body {
 	height: 100%;
 	overflow: scroll;
 	position: relative;
-}
+}*/
 
 a {
 	text-decoration: none;
@@ -16,11 +16,11 @@ a {
 
 
 /****** Body ******/
-.viewport {
+/*.viewport {
 	min-height: 100%;
 	width: 100%;
 	position: relative;
-}
+}*/
 
 .main {
 	clear: both;
@@ -38,12 +38,12 @@ header {
 	padding: 30px 30px 0 30px;
 }
 
-.title {
+.titleBox {
 	font-family: 'Courier New', serif;
-	font-weight: bold;
-	font-size: large;
+	font-size: x-large;
 	margin-bottom: 3px;
 	color: #444;
+	border: 0;
 }
 
 .subscript {

@@ -1,16 +1,27 @@
 angular.module("quicklist", ["firebase"])
-    .factory("listService", ["$firebase", function($firebase) {
+    .factory("list", ["$firebase", function($firebase) {
         getListID();
-        var ref = new Firebase("https://qwiklist.firebaseio.com/" + getListID());
+        var ref = new Firebase("https://qwiklist.firebaseio.com/lists/" + getListID());
         return $firebase(ref);
     }])
 
-    .controller("listController", ["$scope", "listService",
-        function($scope, listService) {
-            $scope.items = listService;
+    .factory("listName", ["$firebase", function($firebase) {
+        getListID();
+        var ref = new Firebase("https://qwiklist.firebaseio.com/listNames/" + getListID());
+        return $firebase(ref);
+    }])
+
+    .controller("listController", ["$scope", "list", "listName",
+        function($scope, list, listName) {
+            $scope.items = list;
+            $scope.listName = listName;
+            //$scope.titleText = getListName();
+            $scope.loaded = false;
+
 
             //form validation pattern: http://stackoverflow.com/a/18747273
             $scope.moreThanWhitespace = /\S/;
+            $scope.defaultProductName = "quicklist";
 
             $scope.addItem = function() {
                 if ($scope.addItemForm.addItemBox.$valid) {
@@ -37,6 +48,16 @@ angular.module("quicklist", ["firebase"])
                 $scope.loaded = true;
             });
 
+            $scope.getListName = function() {
+                if(!$scope.listName.$value) 
+                    return $scope.defaultProductName;
+                return $scope.listName.$value;
+            };
+
+            $scope.setListName = function() {
+                $scope.listName.$set($scope.listName.$value);
+            };
+
             $scope.nextItemID = function() {
                 var maxItemID = 0;
                 var keys = $scope.items.$getIndex();
@@ -50,9 +71,9 @@ angular.module("quicklist", ["firebase"])
                 return maxItemID + 1;
             };
 
-            $scope.itemCount = function() {
+            $scope.fbCount = function(list) {
                 var count = 0;
-                var keys = $scope.items.$getIndex();
+                var keys = list.$getIndex();
 
                 keys.forEach(function (key, i) {
                     count++;
